@@ -9,6 +9,7 @@ body{
     align-items: center;
     flex-direction: column;
 }
+
 .circle{
     background-color: white;
     border: solid black;
@@ -18,4 +19,9 @@ body{
     position: relative;
     top: 50px;
     bottom: 50px;
+}
+
+#mainCanvas {
+    width: 800px;
+    height: 800px;
 }
