@@ -18,6 +18,7 @@ function init() {
 
 function draw() {
   helper.context.clearRect(0, 0, helper.element.width, helper.element.height);
+  helper.context.lineStyle = "black";
   drawCircle(helper.context);
   drawLines(helper.context);
 }
@@ -47,21 +48,24 @@ function drawLines(ctx) {
                   helper.circleY,
                   helper.circleX + pointerX,
                   helper.circleY,
-                  "darkblue",
-                  -15,
-                  roundUp(pointerCosine, 3)
+                  helper.circleX + (pointerX / 2),
+                  helper.circleY,
+                  "blue",
+                  roundUp(pointerSine, 3)
                   );
    drawLabeledLine(ctx, helper.circleX + pointerX,
                   helper.circleY,
                   helper.circleX + pointerX,
                   helper.circleY + pointerY,
-                  "darkred",
-                  -15,
-                  roundUp(pointerSine, 3)
+                  helper.circleX + pointerX,
+                  helper.circleY + (pointerY / 2),
+                  "red",
+                  roundUp(-pointerCosine, 3)
                   );
+    ctx.lineStyle = "black";
 }
 
-function drawLabeledLine(ctx, startX, startY, endX, endY, color, textOffset, text) {
+function drawLabeledLine(ctx, startX, startY, endX, endY, textX, textY, color, text) {
   ctx.beginPath();
   ctx.strokeStyle = color;
   ctx.fillStyle = color;
@@ -73,7 +77,7 @@ function drawLabeledLine(ctx, startX, startY, endX, endY, color, textOffset, tex
   ctx.miterLimit = 2;
   ctx.lineJoin = "circle";
   ctx.lineWidth = 1;
-  ctx.strokeText(text, endX / 1.5, endY + textOffset);
+  ctx.strokeText(text, textX, textY);
   //ctx.fillText(text, startX + (endX / 2), startY + (endY / 2) + textOffset);
 }
 
