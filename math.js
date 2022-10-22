@@ -3,7 +3,7 @@ let helper = {}
 function init() {
   helper.circleX = 400;
   helper.circleY = 400;
-  helper.radius = 200;
+  helper.radius = 300;
   helper.element = document.getElementById("mainCanvas");
   helper.context = helper.element.getContext("2d");
   helper.element.addEventListener('pointermove', (event) => {
@@ -38,6 +38,7 @@ function drawLines(ctx) {
   let pointerCosine = Math.cos(helper.pointerAngle);
   let pointerX = helper.radius * pointerSine;
   let pointerY = helper.radius * pointerCosine;
+  drawText(ctx, pointerSine, pointerCosine, helper.pointerAngle);
   ctx.beginPath();
   ctx.lineStyle = "black";
   ctx.fillStyle = "black";
@@ -79,6 +80,15 @@ function drawLabeledLine(ctx, startX, startY, endX, endY, textX, textY, color, t
   ctx.lineWidth = 1;
   ctx.strokeText(text, textX, textY);
   //ctx.fillText(text, startX + (endX / 2), startY + (endY / 2) + textOffset);
+}
+
+function drawText (ctx, sine, cosine, angle) {
+  ctx.font = "20px Arial";
+  ctx.miterLimit = 2;
+  ctx.lineJoin = "circle";
+  ctx.lineWidth = 1;
+  ctx.textAlign = "center";
+  ctx.strokeText(`Sine: ${roundUp(sine, 3)} Cosine: ${-roundUp(cosine, 3)}`, helper.circleX, 50);
 }
 
 function drawCircle(ctx) {
